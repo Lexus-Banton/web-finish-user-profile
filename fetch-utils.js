@@ -8,7 +8,7 @@ const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 export function getUser() {
     return client.auth.user();
 }
-
+console.log(getUser());
 export async function signUpUser(email, password) {
     return await client.auth.signUp({
         email,
@@ -31,11 +31,12 @@ export async function signOutUser() {
 
 export async function updateProfile(profile) {
     // > Part A: upsert into profiles table
-    await client.from('profiles').upsert(profile).single();
+    return await client.from('profiles').upsert(profile).single();
 }
 
 export async function getProfile(id) {
     // > Part B: get profile by id, maybe single row returned
+    return await client.from('profiles').select('*').match({ id }).maybeSingle();
 }
 
 export async function getProfiles() {
