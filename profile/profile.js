@@ -81,3 +81,4 @@ function displayProfile() {
 function displayError() {
     errorDisplay.textContent = error.message;
 }
+// push it
